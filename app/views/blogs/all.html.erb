@@ -18,29 +18,23 @@
   </div>
 </nav>
 
-<div class="top_image"></div><br>
-
-<div class="well well-lg">このサイトはあなたが日々思った何気ない一言を書き綴る場です</div>
-<br>
-<head></head>
+<div class="col-xs-12 col-md-6">
+<head><%= link_to 'ツイートする', new_blog_path %></head>
 
 <h1>ツイート一覧</h1>
 
 <p><%= notice %></p>
 
 <table class="container">
- <div class="col-xs-12 col-md-6">
-   
-   <tr><%= link_to 'ツイートする', new_blog_path,class:"btn-info btn-lg" %></tr>
-   
+ 
 <% @blogs.each do |blog| %>
   <tr>
     <td><%= blog.content %></td>
 
-    <td><%= link_to "編集",edit_blog_path(blog.id),data:{ confirm: '本当に編集していいですか？' } %></td>
+    <td><%= link_to "編集",edit_blog_path(blog.id),data:{ confirm: '本当に編集していいですか？'} %></td>
     
     <td><%= link_to '削除', blog_path(blog.id), method: :delete,data: { confirm: '本当に削除していいですか？' } %></td>
   </tr>
 <% end %>
- </div>
 </table>
+</div>
