@@ -1,7 +1,6 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :show, :edit, :destroy]
- 
+  before_action :set_blog, only: [:show, :edit, :update, :destroy] 
+  
   def index
     @blogs = Blog.all
     #binding.pry
@@ -52,9 +51,9 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     render :new if @blog.invalid?
   end
-  
+
   private
-  
+
   def blog_params
     params.require(:blog).permit(:title, :content)
   end
@@ -62,12 +61,4 @@ class BlogsController < ApplicationController
   def set_blog
     @blog = Blog.find(params[:id])
   end
-  
-   def logged_in_user
-     unless current_user 
-       flash[:referer] = 'ログインしてください'
-       render new_session_path
-     end
-   end
-  
 end
