@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
     #binding.pry
+    @current_user = current_user
   end
 
   def new
@@ -42,6 +43,7 @@ class BlogsController < ApplicationController
   
   def show
     @blog = Blog.find(params[:id])
+    @favorite = current_user.favorites.find_by(blog_id: @blog.id)
   end
   
   def destroy
@@ -53,10 +55,6 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     @blog.user_id = current_user.id #現在ログインしているuserのidを、blogのuser_idカラムに挿入する
     render :new if @blog.invalid?
-  end
-  
-  def show
-    @favorite = current_user.favorites.find_by(blog_id: @blog.id)
   end
   
   private
